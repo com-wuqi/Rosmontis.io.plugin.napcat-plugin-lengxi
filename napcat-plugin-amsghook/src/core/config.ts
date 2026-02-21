@@ -19,12 +19,16 @@ export function loadConfigFromFile (): void {
     state.config = {
       ...DEFAULT_CONFIG, ...saved,
       qqbot: { ...DEFAULT_CONFIG.qqbot!, ...(saved.qqbot || {}) },
+      blockedGroups: saved.blockedGroups || [],
+      blockedUsers: saved.blockedUsers || [],
     };
     // 兼容旧配置：给 rules 补上新字段
     if (Array.isArray(state.config.rules)) {
       state.config.rules = state.config.rules.map(r => ({
         ...r,
         ownerOnly: r.ownerOnly || false,
+        blockedGroups: r.blockedGroups || [],
+        blockedUsers: r.blockedUsers || [],
       }));
     }
   } catch { /* ignore */ }

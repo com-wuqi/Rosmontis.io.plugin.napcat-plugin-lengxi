@@ -15,12 +15,20 @@ export function registerApiRoutes (router: any): void {
     if (body.enabled !== undefined) state.config.enabled = Boolean(body.enabled);
     if (body.debug !== undefined) state.config.debug = Boolean(body.debug);
     if (body.ownerQQ !== undefined) state.config.ownerQQ = String(body.ownerQQ || '');
+    if (body.blockedGroups !== undefined) {
+      state.config.blockedGroups = String(body.blockedGroups || '').split(',').map(s => s.trim()).filter(Boolean);
+    }
+    if (body.blockedUsers !== undefined) {
+      state.config.blockedUsers = String(body.blockedUsers || '').split(',').map(s => s.trim()).filter(Boolean);
+    }
     if (body.rules !== undefined && Array.isArray(body.rules)) {
       state.config.rules = (body.rules as any[]).map(r => ({
         name: String(r.name || ''), enabled: Boolean(r.enabled),
         suffix: String(r.suffix || ''), replace: Boolean(r.replace),
         replaceText: String(r.replaceText || ''),
         ownerOnly: Boolean(r.ownerOnly),
+        blockedGroups: Array.isArray(r.blockedGroups) ? r.blockedGroups.map(String) : [],
+        blockedUsers: Array.isArray(r.blockedUsers) ? r.blockedUsers.map(String) : [],
       })).filter(r => r.name);
     }
     saveConfig();
