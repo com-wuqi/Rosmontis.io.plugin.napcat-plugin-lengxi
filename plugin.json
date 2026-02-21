@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updateTime": "2026-02-21T18:29:58Z",
+  "updateTime": "2026-02-21T18:39:34Z",
   "plugins": [
     {
       "id": "napcat-plugin-aicat",
@@ -18,8 +18,8 @@
     },
     {
       "id": "napcat-plugin-amsghook",
-      "name": "消息代发转卡",
-      "version": "1.0.2",
+      "name": "消息拦截代发转卡",
+      "version": "1.0.3",
       "description": "让所有插件与Onebot的消息通过官机Markdown发送，也可以修改其他插件预发送的内容",
       "author": "冷曦",
       "homepage": "",
