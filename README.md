@@ -10,7 +10,20 @@ NapCat 插件统一仓库，自动构建 & 发布，支持通过 `napcat-plugin-
 
 当你每次更新插件时，请阅读最新的 [Commits](https://github.com/lengxi-root/napcat-plugin-lengxi/commits/main)，更新即代表你同意该版本的功能变更，否则请立即停止更新。插件更新的任何功能皆为插件的一部分，如果你不信任该项目库，请立即卸载相关全部插件。
 
+本仓库所有插件**禁止**以任何形式进行二次分发、二次创作或抄袭相关逻辑与上架 NapCat 插件商城或其他平台。如有违反，请自行承担风险。
+
+本插件库仅供学习交流使用，请在下载后 24 小时内删除当前仓库内插件，因使用本仓库插件所产生的一切后果由用户自行承担。
+
 交流群：**1085402468**
+
+---
+
+## 快速开始
+
+1. 下载 [`napcat-plugin-autoupdate.zip`](https://github.com/lengxi-root/napcat-plugin-lengxi/releases/download/plugins/napcat-plugin-autoupdate.zip)（或前往 [Releases](https://github.com/lengxi-root/napcat-plugin-lengxi/releases) 页面手动下载）
+2. 打开 NapCat WebUI → 插件管理 → 导入插件 → 上传下载的 zip 文件
+3. 安装完成后进入 `插件自动更新` 的 Web 面板 → 侧边栏点击「推荐插件」
+4. 在推荐插件页面即可一键安装和更新本仓库的所有插件
 
 ---
 

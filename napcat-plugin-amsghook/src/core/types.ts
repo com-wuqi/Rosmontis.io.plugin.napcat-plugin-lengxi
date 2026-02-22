@@ -8,6 +8,10 @@ export interface PluginRule {
   replaceText: string;
   /** 仅主人可触发该插件 */
   ownerOnly: boolean;
+  /** 该插件屏蔽的群号列表 */
+  blockedGroups?: string[];
+  /** 该插件屏蔽的用户列表 */
+  blockedUsers?: string[];
 }
 
 export interface QQBotPluginConfig {
@@ -31,6 +35,14 @@ export interface PluginConfig {
   qqbot?: QQBotPluginConfig;
   /** 全局主人QQ号（指令拦截用） */
   ownerQQ?: string;
+  /** 屏蔽群列表：这些群的消息不会触发任何插件指令 */
+  blockedGroups?: string[];
+  /** 屏蔽用户列表：这些用户的消息不会触发任何插件指令 */
+  blockedUsers?: string[];
+  /** 全局官机代发开关 */
+  globalReplace?: boolean;
+  /** 全局仅主人开关 */
+  globalOwnerOnly?: boolean;
 }
 
 export interface LogEntry {

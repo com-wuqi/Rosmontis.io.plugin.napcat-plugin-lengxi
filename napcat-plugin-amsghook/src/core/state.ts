@@ -16,6 +16,10 @@ export const DEFAULT_CONFIG: PluginConfig = {
     forceImageRehost: false, masterQQ: '',
   },
   ownerQQ: '',
+  blockedGroups: [],
+  blockedUsers: [],
+  globalReplace: false,
+  globalOwnerOnly: false,
 };
 
 export const state = {

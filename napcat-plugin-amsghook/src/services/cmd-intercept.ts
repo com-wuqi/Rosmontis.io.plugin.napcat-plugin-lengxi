@@ -30,6 +30,19 @@ export function installCmdInterceptHooks (): void {
 
     const senderQQ = String(event.user_id || '');
     const ownerQQ = state.config.ownerQQ || '';
+    const groupId = String(event.group_id || '');
+
+    // ===== 全局屏蔽检查 =====
+    const blockedGroups = state.config.blockedGroups || [];
+    const blockedUsers = state.config.blockedUsers || [];
+    if (groupId && blockedGroups.includes(groupId)) {
+      if (state.config.debug) addLog('debug', `指令拦截: 群 ${groupId} 已屏蔽，丢弃消息`);
+      return;
+    }
+    if (senderQQ && blockedUsers.includes(senderQQ)) {
+      if (state.config.debug) addLog('debug', `指令拦截: 用户 ${senderQQ} 已屏蔽，丢弃消息`);
+      return;
+    }
 
     // 获取所有已加载插件 (PluginEntry[])
     const plugins: any[] = pm.getLoadedPlugins?.() || [];
@@ -44,10 +57,25 @@ export function installCmdInterceptHooks (): void {
 
       const rule = findRule(pluginName);
 
-      // ===== 仅主人响应检查 =====
-      if (rule?.ownerOnly && ownerQQ && senderQQ !== ownerQQ) {
+      // ===== 仅主人响应检查（全局 or 插件级） =====
+      const isOwnerOnly = state.config.globalOwnerOnly || rule?.ownerOnly;
+      if (isOwnerOnly && ownerQQ && senderQQ !== ownerQQ) {
         if (pluginName !== 'napcat-plugin-amsghook') {
           if (state.config.debug) addLog('debug', `指令拦截: 非主人 ${senderQQ} → ${pluginName} 已拦截`);
+          return;
+        }
+      }
+
+      // ===== 插件级屏蔽检查 =====
+      if (rule) {
+        const pBlockedGroups = rule.blockedGroups || [];
+        const pBlockedUsers = rule.blockedUsers || [];
+        if (groupId && pBlockedGroups.includes(groupId)) {
+          if (state.config.debug) addLog('debug', `指令拦截: 群 ${groupId} → ${pluginName} 已屏蔽`);
+          return;
+        }
+        if (senderQQ && pBlockedUsers.includes(senderQQ)) {
+          if (state.config.debug) addLog('debug', `指令拦截: 用户 ${senderQQ} → ${pluginName} 已屏蔽`);
           return;
         }
       }
