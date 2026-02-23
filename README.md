@@ -20,10 +20,40 @@ NapCat 插件统一仓库，自动构建 & 发布，支持通过 `napcat-plugin-
 
 ## 快速开始
 
+### 方式一：WebUI 导入（旧版 NapCat）
+
 1. 下载 [`napcat-plugin-autoupdate.zip`](https://github.com/lengxi-root/napcat-plugin-lengxi/releases/download/plugins/napcat-plugin-autoupdate.zip)（或前往 [Releases](https://github.com/lengxi-root/napcat-plugin-lengxi/releases) 页面手动下载）
 2. 打开 NapCat WebUI → 插件管理 → 导入插件 → 上传下载的 zip 文件
 3. 安装完成后进入 `插件自动更新` 的 Web 面板 → 侧边栏点击「推荐插件」
 4. 在推荐插件页面即可一键安装和更新本仓库的所有插件
+
+### 方式二：命令行安装（新版 NapCat / 无导入功能时）
+
+新版 NapCat 移除了 WebUI 导入插件功能，可通过命令行手动安装。
+
+#### Docker 环境
+
+进入容器后执行（二选一）：
+
+```bash
+# 直连 GitHub
+curl -L "https://github.com/lengxi-root/napcat-plugin-lengxi/releases/download/plugins/napcat-plugin-autoupdate.zip" -o /tmp/plugin.zip && unzip -o /tmp/plugin.zip -d /app/napcat/plugins && rm /tmp/plugin.zip
+
+# 国内加速（GitHub 访问慢时使用）
+curl -L "https://ghfast.top/https://github.com/lengxi-root/napcat-plugin-lengxi/releases/download/plugins/napcat-plugin-autoupdate.zip" -o /tmp/plugin.zip && unzip -o /tmp/plugin.zip -d /app/napcat/plugins && rm /tmp/plugin.zip
+```
+
+> 如果提示 `curl` 或 `unzip` 不存在，先执行：`apt update && apt install -y curl unzip`
+
+> ⚠️ 请确认插件目录路径为 `/app/napcat/plugins`，不同部署方式路径可能不同，可通过 `find / -path "*/napcat/plugins" -type d 2>/dev/null` 查找。
+
+#### 加载插件
+
+安装完成后，重启容器使插件生效：
+
+```bash
+docker restart <容器名>
+```
 
 ---
 
